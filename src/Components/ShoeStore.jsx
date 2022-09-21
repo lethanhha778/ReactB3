@@ -5,8 +5,23 @@ import ProductList from './ProductList'
 export default class ShoeStore extends Component {
     state = {
         sneakerCurrent: {
-        }
+        },
+        isLogin: false
     }
+    checkLog = ()=>{
+        if(this.state.isLogin){
+            return <p className='text-dark font-weight-bold mt-3'>Xin Chào Mentor</p>
+        }
+        return <button  className="custom-btn btn-3 login" type="submit" onClick={() => { 
+         
+            this.setState({
+                isLogin: true  
+            })
+
+         }}><span> Login</span></button>
+
+    }
+
     addToCart =(sneaker)=>{
         this.setState({
             sneakerCurrent:sneaker
@@ -14,7 +29,7 @@ export default class ShoeStore extends Component {
     }
     renderModal = () => {
         let {name,image,description,quantity,alias,shortDescription,price}= this.state.sneakerCurrent
-            return <div className="row py-5" id='modal' >
+            return <div className="row " id='modal' >
             <div className="col-3">
               <img style={{ width: "100%" }} src={image} alt="" />
             </div>
@@ -76,11 +91,12 @@ export default class ShoeStore extends Component {
                                     <a className="nav-link active" href="#!" style={{ fontWeight: 'bold' }}>Shop</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#modal" style={styleNavA}>Details</a>
+                                    <a className="nav-link" href="#!" style={styleNavA}>Details</a>
                                 </li>
                             </ul>
-                            <form className="d-flex" role="search">
-                                <button className="custom-btn btn-3 login" type="submit"><span>Login</span></button>
+                            <form className="d-flex">
+                                {this.checkLog()}  
+                                
                             </form>
                         </div>
                     </div>
