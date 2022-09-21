@@ -3,51 +3,119 @@ import product from '../Data/dataShoe.json'
 import Modal from './Modal'
 import ProductList from './ProductList'
 export default class ShoeStore extends Component {
-    state={
-       sneakerCurrent:{
-         "id": 1,
-         "name": "Adidas Prophere",
-         "alias": "adidas-prophere",
-         "price": 350,
-         "description": "The adidas Primeknit upper wraps the foot with a supportive fit that enhances movement.\r\n\r\n",
-         "shortDescription": "The midsole contains 20% more Boost for an amplified Boost feeling.\r\n\r\n",
-         "quantity": 995,
-         "image": "http://svcy3.myclass.vn/images/adidas-prophere.png"
-       }
+    state = {
+        sneakerCurrent: {
+        }
     }
-    
-    setStateModal = (sneaker) =>{
+    addToCart =(sneaker)=>{
         this.setState({
-           sneakerCurrent:sneaker
+            sneakerCurrent:sneaker
         })
-
     }
+    renderModal = () => {
+        let {name,image,description,quantity,alias,shortDescription,price}= this.state.sneakerCurrent
+            return <div className="row py-5" id='modal' >
+            <div className="col-3">
+              <img style={{ width: "100%" }} src={image} alt="" />
+            </div>
+            <div className="col-9">
+              <table className="table text-start">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr>
+                    <th scope="row" style={{ width: "100px" }}>Name:</th>
+                    <td>{name}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Prices:</th>
+                    <td>{price}<sup>$</sup></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Alias:</th>
+                    <td>{alias}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Description:</th>
+                    <td>{description}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Short Description:</th>
+                    <td>{shortDescription}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Quantity:</th>
+                    <td>{quantity}$</td>
+                  </tr>   
+                </tbody>
+              </table>
+            </div>
+          </div>
+    }
+
     render() {
+        const styleNavA = {
+            color: 'black',
+        }
         return (
-            <div className=''>
-                <h1 className='card-title fw-bold text-bg-primary text-white'>Shoes Shop</h1>
-                <div className="container py-4">
-                <div className="row">
-                    <div className="col-2">
-                        <ul className="nav flex-column">
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#!">Home</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#!">Shop</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#modal">Details</a>
-                            </li>
-                        </ul>
+            <div >
+                <nav className="navbar navbar-expand-lg shadow">
+                    <div className="container-fluid mx-5">
+                        <a className="navbar-brand" href="#!"><img src="https://www.adidas.com.vn/glass/react/74e64f2/assets/img/icon-adidas-logo.svg" alt="" /></a>
+                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon" />
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul className="navbar-nav m-auto">
+                                <li className="nav-item">
+                                    <a className="nav-link" aria-current="page" href="#!" style={styleNavA} >Home</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#!" style={{ fontWeight: 'bold' }}>Shop</a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#modal" style={styleNavA}>Details</a>
+                                </li>
+                            </ul>
+                            <form className="d-flex" role="search">
+                                <button className="custom-btn btn-3 login" type="submit"><span>Login</span></button>
+                            </form>
+                        </div>
                     </div>
-                    <div className="col-10">
-                        <ProductList data={product} setStateModal ={this.setStateModal} />
-                        <Modal content={this.state.sneakerCurrent}/>
+                </nav>
+
+                <div className="container-fluid  py-4">
+                    <div className="row">
+                        <div className="col-2">
+                            <ul className="nav flex-column"  >
+                                <li className="custom-btn btn-3 " >
+                                    <a href="#!">Nam</a>
+                                </li>
+                                <li className="custom-btn btn-3">
+                                    <a href="#!">Nữ</a>
+                                </li>
+                                <li className="custom-btn btn-3 ">
+                                    <a href="#!">Trẻ Em</a>
+                                </li>
+                                <li className="custom-btn btn-3 ">
+                                    <a href="#!">Thể Thao</a>
+                                </li>
+                                <li className="custom-btn btn-3 ">
+                                    <a href="#!">Các Nhãn Hiệu</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="col-10" >
+                            <ProductList data={product} addToCart={this.addToCart}/>
+                            <Modal renderModal={this.renderModal} />
+                        </div>
+
+
                     </div>
                 </div>
-                </div>
-                
+
 
             </div>
         )
