@@ -13,63 +13,16 @@ export default class ShoeStore extends Component {
             return <p className='text-dark font-weight-bold mt-3'>Xin Chào Mentor</p>
         }
         return <button  className="custom-btn btn-3 login" type="submit" onClick={() => { 
-         
             this.setState({
                 isLogin: true  
             })
-
          }}><span> Login</span></button>
-
     }
-
     addToCart =(sneaker)=>{
         this.setState({
             sneakerCurrent:sneaker
         })
     }
-    renderModal = () => {
-        let {name,image,description,quantity,alias,shortDescription,price}= this.state.sneakerCurrent
-            return <div className="row " id='modal' >
-            <div className="col-3">
-              <img style={{ width: "100%" }} src={image} alt="" />
-            </div>
-            <div className="col-9">
-              <table className="table text-start">
-                <thead>
-                  <tr>
-                  </tr>
-                </thead>
-                <tbody>  
-                  <tr>
-                    <th scope="row" style={{ width: "100px" }}>Name:</th>
-                    <td>{name}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Prices:</th>
-                    <td>{price}<sup>$</sup></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Alias:</th>
-                    <td>{alias}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Description:</th>
-                    <td>{description}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Short Description:</th>
-                    <td>{shortDescription}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Quantity:</th>
-                    <td>{quantity}$</td>
-                  </tr>   
-                </tbody>
-              </table>
-            </div>
-          </div>
-    }
-
     render() {
         const styleNavA = {
             color: 'black',
@@ -95,8 +48,7 @@ export default class ShoeStore extends Component {
                                 </li>
                             </ul>
                             <form className="d-flex">
-                                {this.checkLog()}  
-                                
+                                {this.checkLog()}                        
                             </form>
                         </div>
                     </div>
@@ -124,15 +76,11 @@ export default class ShoeStore extends Component {
                             </ul>
                         </div>
                         <div className="col-10" >
-                            <ProductList data={product} addToCart={this.addToCart}/>
-                            <Modal renderModal={this.renderModal} />
+                            <ProductList productsData={product} addToCart={this.addToCart}/>
+                            <Modal content={this.state.sneakerCurrent} />
                         </div>
-
-
                     </div>
                 </div>
-
-
             </div>
         )
     }
